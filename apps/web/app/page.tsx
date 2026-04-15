@@ -1,8 +1,11 @@
-import Dashboard from "@/components/Dashboard";
-import LoginForm from "@/components/LoginForm";
-import { isAuthenticated } from "@/lib/auth";
-import { prisma } from "@/lib/prisma";
-import { seedPhrases } from "@/lib/seed-phrases";
+import Dashboard from "../components/Dashboard";
+import LoginForm from "../components/LoginForm";
+import { isAuthenticated } from "../lib/auth";
+import { prisma } from "../lib/prisma";
+import { seedPhrases } from "../lib/seed-phrases";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 async function ensureConfig() {
   const existing = await prisma.botConfig.findUnique({
