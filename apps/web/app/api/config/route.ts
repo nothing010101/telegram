@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
-import { isAuthenticated } from "@/lib/auth";
-import { seedPhrases } from "@/lib/seed-phrases";
-import { MIN_INTERVAL_SECONDS } from "@/lib/config";
+import { prisma } from "../../../lib/prisma";
+import { isAuthenticated } from "../../../lib/auth";
+import { seedPhrases } from "../../../lib/seed-phrases";
+import { MIN_INTERVAL_SECONDS } from "../../../lib/config";
 import { z } from "zod";
 
 async function ensureConfig() {
