@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { isAuthenticated } from "@/lib/auth";
+import { isAuthenticated } from "../../../lib/auth";
 
 type TelegramUpdate = {
   update_id: number;
