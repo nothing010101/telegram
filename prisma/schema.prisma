@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model BotConfig {
+  id               Int       @id @default(1)
+  isEnabled        Boolean   @default(false)
+  mode             SendMode  @default(RANDOM)
+  intervalSeconds  Int       @default(300)
+  targetChatId     String?
+  lastSentAt       DateTime?
+  nextRunAt        DateTime?
+  sequentialIndex  Int       @default(0)
+  updatedAt        DateTime  @updatedAt
+  createdAt        DateTime  @default(now())
+  phrases          Phrase[]
+  logs             SendLog[]
+}
+
+model Phrase {
+  id         Int       @id @default(autoincrement())
+  text       String
+  sortOrder  Int       @default(0)
+  isActive   Boolean   @default(true)
+  configId   Int
+  config     BotConfig @relation(fields: [configId], references: [id], onDelete: Cascade)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
+
+model SendLog {
+  id         Int       @id @default(autoincrement())
+  configId   Int
+  config     BotConfig @relation(fields: [configId], references: [id], onDelete: Cascade)
+  message    String
+  status     SendStatus
+  error      String?
+  sentAt     DateTime  @default(now())
+  telegramMessageId Int?
+}
+
+enum SendMode {
+  RANDOM
+  SEQUENTIAL
+}
+
+enum SendStatus {
+  SUCCESS
+  FAILED
+}

@@ -1,0 +1,21 @@
+{
+  "name": "telegram-curhat-starter",
+  "private": true,
+  "packageManager": "npm@10.8.2",
+  "workspaces": [
+    "apps/web",
+    "apps/worker"
+  ],
+  "scripts": {
+    "postinstall": "npm run prisma:generate",
+    "prisma:generate": "npx prisma generate",
+    "prisma:migrate": "npx prisma migrate deploy",
+    "dev:web": "npm run dev --workspace web",
+    "dev:worker": "npm run dev --workspace worker",
+    "build:web": "npm run build --workspace web",
+    "build:worker": "npm run build --workspace worker"
+  },
+  "devDependencies": {
+    "prisma": "^5.22.0"
+  }
+}
